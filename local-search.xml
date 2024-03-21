@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>Data capture app to aid researchers in the Department of English</title>
+    <link href="/portfolio/2024/03/09/Data-capture-app-to-aid-researchers-in-the-Department-of-English/"/>
+    <url>/portfolio/2024/03/09/Data-capture-app-to-aid-researchers-in-the-Department-of-English/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>A dual platform app developed by Flutter with Dart language.</p></blockquote><a class="btn" href="https://github.com/f88083/my_works/tree/main/english_research_data_collecting_app"  title="english_research_data_collecting_app" target="_blank">GitHub</a><h2 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a>Screenshots</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/zHvHDbt.png" alt="audio list"></div><div class="group-image-wrap"><img src="https://i.imgur.com/5lTJsFC.png" alt="record list"></div><div class="group-image-wrap"><img src="https://i.imgur.com/bmqqplP.png" alt="feedback list"></div></div></div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/cdpzEgf.png" alt="audio player"></div><div class="group-image-wrap"><img src="https://i.imgur.com/yszXR4F.png" alt="setting"></div></div></div><h2 id="Project-Description"><a href="#Project-Description" class="headerlink" title="Project Description"></a>Project Description</h2><p>This app is to help the English language researchers to collect the data of the user’s understanding to the audios. It is tailored to revolutionize research at the University of Liverpool’s Department of English. This app combines an audio player with comprehension assessment, enabling seamless data collection. It boasts an intuitive UI, audio list view, dynamic data charts using “<code>syncfusion_flutter_charts</code>,” and a text feedback viewer. Crafted using <code>Flutter SDK</code> and <code>Dart</code> on <code>Windows 10</code>, this app ensures cross-platform compatibility. This tool empowers researchers by simplifying data collection and analysis, bridging the gap between innovation and practicality through a solo development effort.</p><h3 id="Using"><a href="#Using" class="headerlink" title="Using"></a>Using</h3><ul><li>Flutter SDK</li><li>Dart</li></ul><h3 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h3><ul><li>Cross-platform (Currently Android only)</li><li>Audio player</li><li>Data storage</li><li>Audio, text feedback collecting</li><li>Clear UI</li><li>Data (feedback) shows for researchers to edit</li></ul><h2 id="Highlight-Functions"><a href="#Highlight-Functions" class="headerlink" title="Highlight Functions"></a>Highlight Functions</h2><h3 id="List-views"><a href="#List-views" class="headerlink" title="List views"></a>List views</h3><ul><li>Audio lists</li><li>Clarity data list</li><li>Feedback data list</li><li>File searching block</li><li>Setting page for administrator</li></ul><h3 id="Administrator-functions"><a href="#Administrator-functions" class="headerlink" title="Administrator functions"></a>Administrator functions</h3><ul><li>Each item is removable individually</li><li>Deletion of the audios</li><li>Add audios</li></ul>    <div class="fold">      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-0e876315" role="button" aria-expanded="false" aria-controls="collapse-0e876315">        <div class="fold-arrow">▶</div>Administrator Mode Screenshot      </div>      <div class="fold-collapse collapse" id="collapse-0e876315">        <div class="fold-content">          <p><img src="https://i.imgur.com/Zn26QJN.png" alt="administrator mode"></p>        </div>      </div>    </div><h3 id="Audio-Player"><a href="#Audio-Player" class="headerlink" title="Audio Player"></a>Audio Player</h3><ul><li>Play</li><li>Pause</li><li>Stop</li><li>Jump to desired timestamp by the time slider</li><li>Record the clarity value from the user by dragging the slider</li><li>Listening mode to avoid clarity data collection</li><li>Feedback frame for the users to provide text feedback to the researchers</li></ul><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/Y2GNR5r.png" alt="audio pause"></div><div class="group-image-wrap"><img src="https://i.imgur.com/Ikf4Z0B.png" alt="listening mode on"></div><div class="group-image-wrap"><img src="https://i.imgur.com/1cayHda.png" alt="submit feedback confirmation"></div></div></div><h3 id="Data-Viewing"><a href="#Data-Viewing" class="headerlink" title="Data Viewing"></a>Data Viewing</h3><ul><li>Line chart for clarity data viewing</li><li>Feedback text viewing (Font enlargeable)</li></ul><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/dIpZQdG.png" alt="clarity data viewer example"></div><div class="group-image-wrap"><img src="https://i.imgur.com/AqLOCdE.png" alt="another example of clarity data viewer"></div><div class="group-image-wrap"><img src="https://i.imgur.com/kSip0ja.png" alt="Feedback viewer"></div></div></div>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Flutter</tag>
+      
+      <tag>Dart</tag>
+      
+      <tag>Mobile App</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/portfolio/2024/03/05/hello-world/"/>
     <url>/portfolio/2024/03/05/hello-world/</url>
