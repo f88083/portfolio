@@ -1,0 +1,918 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-TW" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/portfolio/images/logo.png">
+  <link rel="icon" href="/portfolio/images/logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Simon Lai">
+  <meta name="keywords" content="portfolio">
+  
+    <meta name="description" content="Use Network Simulator 3 to simulate the MANET with AODV and DSDV routing protocols under Blackhole and Flooding attacks to observe and analyse the impact caused by the attacks and determine the more e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MSc Dissertation - Comparative Performance Analysis of AODV and DSDV Against Blackhole and Flooding Attacks in MANET Using NS-3">
+<meta property="og:url" content="https://f88083.github.io/portfolio/2024/03/21/MSc-Dissertation-Comparative-Performance-Analysis-of-AODV-and-DSDV-Against-Blackhole-and-Flooding-Attacks-in-MANET-Using-NS-3/index.html">
+<meta property="og:site_name" content="Simon Lai&#39;s Portfolio">
+<meta property="og:description" content="Use Network Simulator 3 to simulate the MANET with AODV and DSDV routing protocols under Blackhole and Flooding attacks to observe and analyse the impact caused by the attacks and determine the more e">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://simonlai0.files.wordpress.com/2023/09/title_page.jpg?w=851">
+<meta property="article:published_time" content="2024-03-21T14:41:57.000Z">
+<meta property="article:modified_time" content="2024-03-22T15:39:42.769Z">
+<meta property="article:author" content="Simon Lai">
+<meta property="article:tag" content="Network Simulator 3">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Shell Script">
+<meta property="article:tag" content="Bash Script">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://simonlai0.files.wordpress.com/2023/09/title_page.jpg?w=851">
+  
+  
+  
+  <title>MSc Dissertation - Comparative Performance Analysis of AODV and DSDV Against Blackhole and Flooding Attacks in MANET Using NS-3 - Simon Lai&#39;s Portfolio</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/portfolio/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/portfolio/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/portfolio/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"f88083.github.io","root":"/portfolio/","version":"1.9.7","typing":{"enable":true,"typeSpeed":35,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":"G-HJLTHPCQMP"},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/portfolio/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/portfolio/js/utils.js" ></script>
+  <script  src="/portfolio/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=G-HJLTHPCQMP", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-HJLTHPCQMP');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/portfolio/">
+      <strong>Simon Lai&#39;s Portfolio</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首頁</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>歸檔</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分類</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>標籤</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/portfolio/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>關於</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/portfolio/images/bg.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MSc Dissertation - Comparative Performance Analysis of AODV and DSDV Against Blackhole and Flooding Attacks in MANET Using NS-3"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          499 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 分鐘
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">MSc Dissertation - Comparative Performance Analysis of AODV and DSDV Against Blackhole and Flooding Attacks in MANET Using NS-3</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>Use Network Simulator 3 to simulate the MANET with AODV and DSDV routing protocols under Blackhole and Flooding attacks to observe and analyse the impact caused by the attacks and determine the more effective protocol against them by using Packet Delivery Ratio, End-to-end Delay, and Throughput as the metrics.</p>
+</blockquote>
+<a class="btn" href="https://github.com/f88083/my_works/tree/main/msc_dissertation"  title="Relative Code Repository" target="_blank">GitHub</a>
+
+<h2 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a>Screenshots</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/uPvjzN5.png" srcset="/portfolio/img/loading.gif" lazyload alt="Dissertation title page"></div><div class="group-image-wrap"><img src="https://i.imgur.com/nh4rEQ9.png" srcset="/portfolio/img/loading.gif" lazyload alt="Terminal executes ns-3"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/LI04y1d.png" srcset="/portfolio/img/loading.gif" lazyload alt="Simulation process"></div><div class="group-image-wrap"><img src="https://i.imgur.com/ax46BuL.png" srcset="/portfolio/img/loading.gif" lazyload alt="AODV"></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://i.imgur.com/hvBdKe1.png" srcset="/portfolio/img/loading.gif" lazyload alt="Blackhole attack"></div><div class="group-image-wrap"><img src="https://i.imgur.com/Nr2xN1B.png" srcset="/portfolio/img/loading.gif" lazyload alt="Flooding attack"></div></div></div>
+
+<h2 id="Project-Description"><a href="#Project-Description" class="headerlink" title="Project Description"></a>Project Description</h2><p>Mobile Ad-hoc network (MANET) is an infrastructure-free network that can be configured by the devices within the system. MANET can operate in severe situations like natural disasters and oil drilling. However, MANET is vulnerable to various attacks, such as Blackhole and Flooding attacks, due to its limited computing resources, decentralisation, and dynamic topology. Therefore, realising the impact of the attacks on the network is critical to develop an effective countermeasure. This project uses Network Simulator 3 to simulate the MANET with AODV and DSDV routing protocols under Blackhole and Flooding attacks to observe and analyse the impact caused by the attacks and determine the more effective protocol against them by using Packet Delivery Ratio, End-to-end Delay, and Throughput as the metrics. The result shows that AODV is more competent than DSDV in most scenarios regarding Packet Delivery Ratio and Throughput. However, DSDV mainly performs better than AODV in End-to-end Delay.</p>
+<h3 id="Using"><a href="#Using" class="headerlink" title="Using"></a>Using</h3><ul>
+<li>C++</li>
+<li>Python</li>
+<li>Shell script – bash script</li>
+<li>Network Simulator 3</li>
+<li>Linux</li>
+</ul>
+<h3 id="Achievements"><a href="#Achievements" class="headerlink" title="Achievements"></a>Achievements</h3><ul>
+<li>Simulate MANET</li>
+<li>Implement Blackhole attack</li>
+<li>Implement Flooding attack</li>
+<li>Comparative analysis</li>
+</ul>
+<h2 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h2><h3 id="Aim"><a href="#Aim" class="headerlink" title="Aim"></a>Aim</h3><p>This dissertation aims to survey and compare the reactive and proactive routing protocols to determine which protocol is more resilient when the MANET is under attack. The research focuses on AODV, a reactive protocol, and DSDV, a proactive protocol, since they are the most common protocols used in MANETs. Blackhole and Flooding attacks have been selected for this study because they are two types of common attacks.</p>
+<h3 id="Objectives"><a href="#Objectives" class="headerlink" title="Objectives"></a>Objectives</h3><ul>
+<li>Objective 1: Conduct a Comprehensive literature review on Blackhole and Flooding attacks in MANET.</li>
+<li>Objective 2: Review and detail how reactive and proactive routing protocols operate, focusing on AODV and DSDV.</li>
+<li>Objective 3: Determine simulation parameters by reviewing real-world situations.</li>
+<li>Objective 4: Design and implement simulations on NS-3 (Network Simulator 3) to measure packet delivery ratio (PDR), end-to-end delay (E2E), and throughput.</li>
+<li>Objective 5: Create attack scenarios (Blackhole and Flooding) using C++ programming in NS-3.</li>
+<li>Objective 6: Analyse and explain simulation results of AODV and DSDV with and without the attacks</li>
+<li>Objective 7: Conduct a comparative analysis of the impact of Blackhole and Flooding attacks on AODV and DSDV.</li>
+<li>Objective 8: Summarise findings and provide recommendations for future research on MANET security.</li>
+</ul>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>In conclusion, AODV is more reliable than DSDV against the Blackhole and Flooding attacks regarding PDR and throughput. While DSDV is more capable than AODV against the attacks in end-to-end delay but not in the 50-node area when the Blackhole attack exists. Therefore, AODV is generally more resilient than DSDV under the Blackhole and Flooding attack. This conclusion is similar to the work by M. N. B. Anwar’s <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="M. N. B. Anwar, “Performance analysis of aodv, olsr, dsdv routing protocols in manet under black hole attack,” in Proceedings of the international conference on computing advancements, pp. 1–5, 2020.">[1]</span></a></sup>, A. Singh et al. <sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="A. Singh, G. Singh, and M. Singh, “Comparative study of olsr, dsdv, aodv, dsr and zrp routing protocols under blackhole attack in mobile ad hoc network,” in Intelligent Communication, Control and Devices: Proceedings of ICICCD 2017, pp. 443–453, Springer, 2018.">[2]</span></a></sup>, and A. A. Chavan, D. S. Kurule, and P. U. Dere <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="A. Chavan, D. Kurule, and P. Dere, “Performance analysis of aodv and dsdv routing protocol in manet and modifications in aodv against black hole attack,” Procedia Computer Science, vol. 79, pp. 835–844, 2016.">[3]</span></a></sup>.</p>
+<h2 id="Code-Showcase"><a href="#Code-Showcase" class="headerlink" title="Code Showcase"></a>Code Showcase</h2><span class="label label-info">C++ codes to set up the entire MANET simulation</span>
+
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Ipv4AddressHelper addressAdhoc<span class="token punctuation">;</span>
+addressAdhoc<span class="token punctuation">.</span><span class="token function">SetBase</span><span class="token punctuation">(</span><span class="token string">"10.1.1.0"</span><span class="token punctuation">,</span> <span class="token string">"255.255.255.0"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Ipv4InterfaceContainer adhocInterfaces<span class="token punctuation">;</span>
+adhocInterfaces <span class="token operator">=</span> addressAdhoc<span class="token punctuation">.</span><span class="token function">Assign</span><span class="token punctuation">(</span>adhocDevices<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+OnOffHelper <span class="token function">onoff1</span><span class="token punctuation">(</span><span class="token string">"ns3::UdpSocketFactory"</span><span class="token punctuation">,</span> <span class="token function">Address</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+onoff1<span class="token punctuation">.</span><span class="token function">SetAttribute</span><span class="token punctuation">(</span><span class="token string">"OnTime"</span><span class="token punctuation">,</span> <span class="token function">StringValue</span><span class="token punctuation">(</span><span class="token string">"ns3::ConstantRandomVariable[Constant=1.0]"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+onoff1<span class="token punctuation">.</span><span class="token function">SetAttribute</span><span class="token punctuation">(</span><span class="token string">"OffTime"</span><span class="token punctuation">,</span> <span class="token function">StringValue</span><span class="token punctuation">(</span><span class="token string">"ns3::ConstantRandomVariable[Constant=0.0]"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nSinks<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    Ptr<span class="token operator">&lt;</span>Socket<span class="token operator">></span> sink <span class="token operator">=</span> <span class="token function">SetupPacketReceive</span><span class="token punctuation">(</span>adhocInterfaces<span class="token punctuation">.</span><span class="token function">GetAddress</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> adhocNodes<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    AddressValue <span class="token function">remoteAddress</span><span class="token punctuation">(</span><span class="token function">InetSocketAddress</span><span class="token punctuation">(</span>adhocInterfaces<span class="token punctuation">.</span><span class="token function">GetAddress</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    onoff1<span class="token punctuation">.</span><span class="token function">SetAttribute</span><span class="token punctuation">(</span><span class="token string">"Remote"</span><span class="token punctuation">,</span> remoteAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Ptr<span class="token operator">&lt;</span>UniformRandomVariable<span class="token operator">></span> var <span class="token operator">=</span> <span class="token generic-function"><span class="token function">CreateObject</span><span class="token generic class-name"><span class="token operator">&lt;</span>UniformRandomVariable<span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ApplicationContainer temp <span class="token operator">=</span> onoff1<span class="token punctuation">.</span><span class="token function">Install</span><span class="token punctuation">(</span>adhocNodes<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span>i <span class="token operator">+</span> nSinks<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token function">Seconds</span><span class="token punctuation">(</span>var<span class="token operator">-></span><span class="token function">GetValue</span><span class="token punctuation">(</span><span class="token number">100.0</span><span class="token punctuation">,</span> <span class="token number">101.0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    temp<span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token function">Seconds</span><span class="token punctuation">(</span>TotalTime<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<span class="label label-info">Bash Script to obtain multiple results automatically</span>
+
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token assign-left variable">output_file</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$HOME</span>/Desktop/resultsFrom0to10.txt"</span>
+<span class="token assign-left variable">protocol_value</span><span class="token operator">=</span><span class="token variable">$1</span>
+<span class="token assign-left variable">malicious_node_value</span><span class="token operator">=</span><span class="token variable">$2</span>
+<span class="token assign-left variable">stream_index_value</span><span class="token operator">=</span><span class="token variable">$3</span>
+
+<span class="token comment"># Function to display the help message</span>
+<span class="token function-name function">display_help</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Usage: ./script_name.sh [protocol_value] [malicious_node_value] [stream_index_value]"</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Options:"</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"  protocol_value        Specify the protocol value"</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"  malicious_node_value  Specify the enable_malicious_node value"</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"  stream_index_value    Specify the streamIndex value"</span>
+    <span class="token builtin class-name">echo</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment"># Check if the script is called with the help option</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$1</span> <span class="token operator">==</span> <span class="token string">"--help"</span> <span class="token operator">||</span> <span class="token variable">$1</span> <span class="token operator">==</span> <span class="token string">"-h"</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    display_help
+    <span class="token builtin class-name">exit</span> <span class="token number">0</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># Check if the number of arguments is correct</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$#</span> <span class="token parameter variable">-ne</span> <span class="token number">3</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">"Error: Incorrect number of arguments."</span>
+    display_help
+    <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token assign-left variable">output_file</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$HOME</span>/Desktop/resultsFrom0to<span class="token variable">$stream_index_value</span>-DSDV-50nodes-with-Blackhole.txt"</span>
+
+
+<span class="token comment"># Remove the output file if it already exists</span>
+<span class="token function">rm</span> <span class="token parameter variable">-f</span> <span class="token string">"<span class="token variable">$output_file</span>"</span>
+
+<span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span>index<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> index<span class="token operator">&lt;=</span>$stream_index_value<span class="token punctuation">;</span> index<span class="token operator">++</span><span class="token punctuation">))</span></span>
+<span class="token keyword">do</span>
+    ./ns3 run aodv-and-dsdv-compare -- <span class="token parameter variable">--protocol</span><span class="token operator">=</span><span class="token variable">$protocol_value</span> <span class="token parameter variable">--enable_malicious_node</span><span class="token operator">=</span><span class="token variable">$malicious_node_value</span> <span class="token parameter variable">--streamIndex</span><span class="token operator">=</span><span class="token variable">$index</span> <span class="token operator">>></span> <span class="token string">"<span class="token variable">$output_file</span>"</span> <span class="token operator"><span class="token file-descriptor important">2</span>></span><span class="token file-descriptor important">&amp;1</span>
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<span class="label label-info">Line chart drawer by Python</span>
+
+<figure><div class="code-wrapper"><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Get the end-to-end delay from the txt file</span>
+<span class="token keyword">def</span> <span class="token function">getE2EDelay</span><span class="token punctuation">(</span>lines<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># Store all total E2EDelay into a list</span>
+    e2eDelayList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    lineCount <span class="token operator">=</span> <span class="token number">0</span>  <span class="token comment"># Count E2EDelay lines</span>
+    <span class="token keyword">for</span> line <span class="token keyword">in</span> lines<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> lineCount <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">:</span>  <span class="token comment"># Stop when 10 nodes:</span>
+            <span class="token keyword">break</span>
+        <span class="token keyword">if</span> <span class="token string">"Average End to End Delay"</span> <span class="token keyword">in</span> line<span class="token punctuation">:</span>
+            lineCount <span class="token operator">+=</span> <span class="token number">1</span>
+
+            <span class="token comment"># Find the index of the '=' character</span>
+            equals_index <span class="token operator">=</span> line<span class="token punctuation">.</span>index<span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span>
+
+            <span class="token comment"># Extract the substring after the '=' character</span>
+            timeString <span class="token operator">=</span> line<span class="token punctuation">[</span>equals_index <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">:</span><span class="token punctuation">]</span>
+
+            <span class="token comment"># Parse the number part</span>
+            <span class="token keyword">match</span> <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span><span class="token string">r"([+-]?\d+\.\d+)e([+-]\d+)"</span><span class="token punctuation">,</span> timeString<span class="token punctuation">)</span>
+            num <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            exp <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token keyword">match</span><span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+            <span class="token comment"># Calculate value</span>
+            val <span class="token operator">=</span> num <span class="token operator">*</span> <span class="token builtin">pow</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> exp<span class="token punctuation">)</span>
+
+            <span class="token comment"># Convert to seconds</span>
+            time_sec <span class="token operator">=</span> val <span class="token operator">*</span> <span class="token number">1e-9</span>
+
+            <span class="token comment"># Store the E2EDelay</span>
+            e2eDelayList<span class="token punctuation">.</span>append<span class="token punctuation">(</span>time_sec<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> e2eDelayList <span class="token comment"># Return the average E2EDelay</span>
+
+<span class="token comment"># AODV vs DSDV without attack 100 topologies result comparison</span>
+<span class="token keyword">def</span> <span class="token function">drawLineChart</span><span class="token punctuation">(</span>aodvList<span class="token punctuation">,</span> dsdvList<span class="token punctuation">,</span> aodv30NodesList<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> dsdv30NodesList<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> aodv50NodesList<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> dsdv50NodesList<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token string">"AODV"</span><span class="token punctuation">:</span> aodvList<span class="token punctuation">,</span>
+            <span class="token string">"DSDV"</span><span class="token punctuation">:</span> dsdvList<span class="token punctuation">,</span>
+            <span class="token string">"AODV with Flooding"</span><span class="token punctuation">:</span> aodv30NodesList<span class="token punctuation">,</span>
+            <span class="token string">"DSDV with Flooding"</span><span class="token punctuation">:</span> dsdv30NodesList<span class="token punctuation">,</span>
+            <span class="token comment"># "AODV 50 Nodes": aodv50NodesList,</span>
+            <span class="token comment"># "DSDV 50 Nodes": dsdv50NodesList,</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">)</span>
+
+    <span class="token comment"># Prepare the graph</span>
+    plt<span class="token punctuation">.</span>figure<span class="token punctuation">(</span>figsize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    ax <span class="token operator">=</span> sns<span class="token punctuation">.</span>lineplot<span class="token punctuation">(</span>data<span class="token operator">=</span>df<span class="token punctuation">)</span>
+    ax<span class="token punctuation">.</span><span class="token builtin">set</span><span class="token punctuation">(</span>xlabel<span class="token operator">=</span><span class="token string">"Sample"</span><span class="token punctuation">,</span> ylabel<span class="token operator">=</span><span class="token string">"Throughput (kbps)"</span><span class="token punctuation">)</span>
+    ax<span class="token punctuation">.</span>set_title<span class="token punctuation">(</span>title<span class="token punctuation">)</span>
+    ax<span class="token punctuation">.</span>grid<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+    <span class="token comment"># Show the graph</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<span class="label label-info">C++ code for AODV blackhole attack</span>
+
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">if</span> <span class="token punctuation">(</span>IsMalicious <span class="token operator">||</span>
+    <span class="token punctuation">(</span><span class="token punctuation">(</span>rreqHeader<span class="token punctuation">.</span><span class="token function">GetUnknownSeqno</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+      <span class="token punctuation">(</span><span class="token keyword">int32_t</span><span class="token punctuation">(</span>toDst<span class="token punctuation">.</span><span class="token function">GetSeqNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token keyword">int32_t</span><span class="token punctuation">(</span>rreqHeader<span class="token punctuation">.</span><span class="token function">GetDstSeqno</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span>
+      toDst<span class="token punctuation">.</span><span class="token function">GetValidSeqNo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>IsMalicious <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token operator">!</span>rreqHeader<span class="token punctuation">.</span><span class="token function">GetDestinationOnly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> toDst<span class="token punctuation">.</span><span class="token function">GetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> VALID<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        m_routingTable<span class="token punctuation">.</span><span class="token function">LookupRoute</span><span class="token punctuation">(</span>origin<span class="token punctuation">,</span> toOrigin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/* Code for Blackhole attack */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>IsMalicious<span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            Ptr<span class="token operator">&lt;</span>NetDevice<span class="token operator">></span> dev <span class="token operator">=</span>
+                m_ipv4<span class="token operator">-></span><span class="token function">GetNetDevice</span><span class="token punctuation">(</span>m_ipv4<span class="token operator">-></span><span class="token function">GetInterfaceForAddress</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            RoutingTableEntry <span class="token function">falseToDst</span><span class="token punctuation">(</span>
+                dev<span class="token punctuation">,</span>
+                dst<span class="token punctuation">,</span>
+                <span class="token boolean">true</span><span class="token punctuation">,</span>
+                rreqHeader<span class="token punctuation">.</span><span class="token function">GetDstSeqno</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">100</span><span class="token punctuation">,</span>
+                m_ipv4<span class="token operator">-></span><span class="token function">GetAddress</span><span class="token punctuation">(</span>m_ipv4<span class="token operator">-></span><span class="token function">GetInterfaceForAddress</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                <span class="token number">1</span><span class="token punctuation">,</span>
+                dst<span class="token punctuation">,</span>
+                m_activeRouteTimeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">SendReplyByIntermediateNode</span><span class="token punctuation">(</span>falseToDst<span class="token punctuation">,</span>
+                                        toOrigin<span class="token punctuation">,</span>
+                                        rreqHeader<span class="token punctuation">.</span><span class="token function">GetGratuitousRrep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">/* Code for Blackhole Attack Simulation ends here */</span>
+        <span class="token function">SendReplyByIntermediateNode</span><span class="token punctuation">(</span>toDst<span class="token punctuation">,</span> toOrigin<span class="token punctuation">,</span> rreqHeader<span class="token punctuation">.</span><span class="token function">GetGratuitousRrep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">// More codes...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>M. N. B. Anwar, “Performance analysis of aodv, olsr, dsdv routing protocols in manet under black hole attack,” in Proceedings of the international conference on computing advancements, pp. 1–5, 2020.
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>A. Singh, G. Singh, and M. Singh, “Comparative study of olsr, dsdv, aodv, dsr and zrp routing protocols under blackhole attack in mobile ad hoc network,” in Intelligent Communication, Control and Devices: Proceedings of ICICCD 2017, pp. 443–453, Springer, 2018.
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span>A. Chavan, D. Kurule, and P. Dere, “Performance analysis of aodv and dsdv routing protocol in manet and modifications in aodv against black hole attack,” Procedia Computer Science, vol. 79, pp. 835–844, 2016.
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/portfolio/tags/Network-Simulator-3/" class="print-no-link">#Network Simulator 3</a>
+      
+        <a href="/portfolio/tags/C/" class="print-no-link">#C++</a>
+      
+        <a href="/portfolio/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/portfolio/tags/Shell-Script/" class="print-no-link">#Shell Script</a>
+      
+        <a href="/portfolio/tags/Bash-Script/" class="print-no-link">#Bash Script</a>
+      
+        <a href="/portfolio/tags/Linux/" class="print-no-link">#Linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MSc Dissertation - Comparative Performance Analysis of AODV and DSDV Against Blackhole and Flooding Attacks in MANET Using NS-3</div>
+      <div>https://f88083.github.io/portfolio/2024/03/21/MSc-Dissertation-Comparative-Performance-Analysis-of-AODV-and-DSDV-Against-Blackhole-and-Flooding-Attacks-in-MANET-Using-NS-3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Simon Lai</div>
+        </div>
+      
+      
+      
+      
+        <div class="license-meta-item">
+          <div>許可協議</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商業性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - 相同方式共享">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/portfolio/2024/03/22/VSCode-Extension-Development-Hexo-Snippet-Paste-Tool-for-Fluid/" title="VSCode Extension Development - Hexo Snippet Paste Tool for Fluid">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VSCode Extension Development - Hexo Snippet Paste Tool for Fluid</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/portfolio/2024/03/20/Data-capture-app-to-aid-researchers-in-the-Department-of-English/" title="Data capture app to aid researchers in the Department of English">
+                        <span class="hidden-mobile">Data capture app to aid researchers in the Department of English</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目錄</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜尋</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">關鍵字</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/portfolio/js/events.js" ></script>
+<script  src="/portfolio/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/portfolio/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/portfolio/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/portfolio/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允許 JavaScript 運行的環境下瀏覽效果更佳</div>
+  </noscript>
+</body>
+</html>
